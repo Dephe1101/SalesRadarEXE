@@ -1,59 +1,23 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/stores/useAuthStore';
 import { 
   Radar, 
   ShieldCheck, 
-  Lock, 
-  Mail, 
-  ArrowRight, 
-  Loader2,
   Globe,
   TrendingUp,
   ArrowLeft
 } from 'lucide-react';
-import { toast } from 'sonner';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { LoginForm } from './LoginForm';
 
+/**
+ * LoginPage (Composition Root)
+ * Following the Senior Architect pattern, this page remains a layout container.
+ * Business logic and form handling are delegated to LoginForm.
+ */
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { login } = useAuthStore();
-  const router = useRouter();
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    setTimeout(() => {
-      const isAdmin = email.toLowerCase().includes('admin');
-      const role = isAdmin ? 'admin' : 'user';
-      
-      document.cookie = `radar_session=true; path=/; max-age=3600`;
-      document.cookie = `radar_role=${role}; path=/; max-age=3600`;
-      
-      login(email);
-      
-      toast.success("Đăng nhập thành công", {
-        description: isAdmin 
-          ? "Truy cập Trung tâm chỉ huy quản trị." 
-          : "Chào mừng bạn quay lại hệ thống điều khiển sales.",
-      });
-
-      if (isAdmin) {
-        router.push('/admin/dashboard');
-      } else {
-        router.push('/leads');
-      }
-    }, 1500);
-  };
-
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
       {/* Dynamic Background Elements */}
@@ -110,65 +74,20 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Login Card */}
+        {/* Login Card (Architectural Card Pattern) */}
         <div className="flex justify-center lg:justify-end animate-in fade-in zoom-in-95 duration-500">
-          <Card className="w-full max-w-md space-y-10 rounded-[40px] border-border bg-card/50 p-12 backdrop-blur-2xl transition-all hover:bg-card/80 shadow-luxury">
+          <Card className="w-full max-w-md space-y-10 rounded-[40px] border-border bg-card/40 p-12 backdrop-blur-2xl transition-all hover:bg-card/60 shadow-luxury">
             <div className="text-center space-y-4">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-linear-to-br from-primary to-blue-600 text-white shadow-2xl shadow-primary/20 rotate-3 transition-transform hover:rotate-0">
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-linear-to-br from-primary to-blue-600 text-white shadow-2xl shadow-primary/20 rotate-1 transition-transform hover:rotate-0">
                 <Radar className="h-10 w-10" />
               </div>
               <div className="space-y-1">
                 <h2 className="text-3xl font-black tracking-tight text-foreground italic">Portal Truy Cập</h2>
-                <p className="text-muted-foreground font-bold text-[10px] uppercase tracking-[0.3em]">Quản trị Sales Radar</p>
+                <p className="text-muted-foreground font-bold text-[10px] uppercase tracking-[0.3em]">Hệ thống bảo mật Sales Radar</p>
               </div>
             </div>
 
-            <form className="space-y-8" onSubmit={handleLogin}>
-              <div className="space-y-3">
-                <Label className="text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground ml-1">Email truy nhập</Label>
-                <div className="relative group">
-                  <Mail className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary z-10" />
-                  <Input 
-                    type="email" 
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="commander@salesradar.io" 
-                    className="h-auto rounded-2xl border-border bg-background/50 py-5 pl-14 pr-6 text-sm font-bold text-foreground placeholder:text-muted-foreground focus-visible:ring-primary/10 transition-all font-mono"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Label className="text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground ml-1">Mật khẩu xác thực</Label>
-                <div className="relative group">
-                  <Lock className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary z-10" />
-                  <Input 
-                    type="password" 
-                    defaultValue="••••••••"
-                    className="h-auto rounded-2xl border-border bg-background/50 py-5 pl-14 pr-6 text-sm font-bold text-foreground placeholder:text-muted-foreground focus-visible:ring-primary/10 transition-all"
-                  />
-                </div>
-              </div>
-
-              <Button 
-                type="submit"
-                disabled={loading}
-                className="group relative flex h-auto w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-foreground py-5 text-sm font-black text-background transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
-              >
-                <span className="relative z-10 flex items-center gap-2 uppercase tracking-widest">
-                  {loading ? (
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                  ) : (
-                    <>
-                      Khởi tạo kết nối
-                      <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </>
-                  )}
-                </span>
-                <div className="absolute inset-0 z-0 bg-linear-to-r from-primary to-accent opacity-0 group-hover:opacity-10 transition-opacity" />
-              </Button>
-            </form>
+            <LoginForm />
 
             <div className="flex flex-col items-center gap-4 border-t border-border pt-8">
               <div className="flex items-center gap-2 rounded-full bg-card/10 border border-border px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground shadow-inner">

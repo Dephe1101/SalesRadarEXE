@@ -1,5 +1,5 @@
 import { Lead, ScoreWeights } from '@/types/lead';
-import { ScoreWeightsSchema } from '@/schemas/lead.schema';
+import { ScoreWeightsSchema } from '@/lib/validations/lead.schema';
 
 /**
  * Calculates the total score for a lead based on weights for Fit, Signal, and Recency.

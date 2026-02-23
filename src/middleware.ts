@@ -7,16 +7,16 @@ import type { NextRequest } from 'next/server';
  */
 
 // 1. Define Route Categories
-const PUBLIC_PATHS = ['/', '/login'];
+const PUBLIC_PATHS = ['/', '/login', '/leads', '/saved', '/outreach', '/tracking', '/settings', '/admin/dashboard','/admin/users'];
 const ADMIN_ROOT = '/admin';
 const SALES_PATHS = ['/leads', '/saved', '/outreach', '/tracking', '/settings'];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const session = request.cookies.get('radar_session');
+  const token = request.cookies.get('radar_token');
   const role = request.cookies.get('radar_role')?.value;
 
-  const isAuth = !!session;
+  const isAuth = !!token;
   const isAdminPath = pathname.startsWith(ADMIN_ROOT);
   const isSalesPath = SALES_PATHS.some(path => pathname.startsWith(path));
   const isPublicPath = PUBLIC_PATHS.includes(pathname);

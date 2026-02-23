@@ -6,16 +6,20 @@ import { Lead } from '@/types/lead';
 import { leadService } from '@/services/lead.service';
 import { toast } from 'sonner';
 import { 
-  Building2, 
-  Sparkles, 
-  MoreHorizontal, 
+  Building2,
+  Sparkles,
+  MoreHorizontal,
   ExternalLink,
   ShieldCheck,
   TrendingUp,
   Loader2,
   Target,
-  ArrowUpRight
+  ArrowUpRight,
+  Activity,
+  MessageSquare,
+  Globe
 } from 'lucide-react';
+import { LeadDetailModal } from './LeadDetailModal';
 import { 
   Table, 
   TableBody, 
@@ -30,7 +34,8 @@ import { Progress } from "@/components/ui/progress";
 
 export const LeadTable: React.FC = () => {
   const { data: leads, isLoading } = useRadarLeads();
-  const [isProcessing, setIsProcessing] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = React.useState<string | null>(null);
+  const [selectedLead, setSelectedLead] = React.useState<Lead | null>(null);
 
   const handleGenEmail = async (lead: Lead) => {
     setIsProcessing(lead.id);
@@ -85,7 +90,8 @@ export const LeadTable: React.FC = () => {
             {leads?.map((lead) => (
               <TableRow 
                 key={lead.id} 
-                className="group border-b border-border/50 last:border-0 hover:bg-muted/30 transition-colors"
+                className="group border-b border-border/50 last:border-0 hover:bg-muted/30 transition-colors cursor-pointer"
+                onClick={() => setSelectedLead(lead)}
               >
                 <TableCell className="px-8 py-5">
                   <div className="flex items-center gap-4">
@@ -182,6 +188,13 @@ export const LeadTable: React.FC = () => {
           Quét lần cuối: {new Date().toLocaleTimeString()}
         </div>
       </div>
+
+      <LeadDetailModal 
+        lead={selectedLead}
+        isOpen={!!selectedLead}
+        onClose={() => setSelectedLead(null)}
+        onGenerateEmail={handleGenEmail}
+      />
     </div>
   );
 };

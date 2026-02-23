@@ -71,24 +71,24 @@ export default function AdminPage() {
             </button>
           </div>
           
-          <div className="rounded-3xl border border-border bg-muted/30/20 overflow-hidden">
+          <div className="rounded-[32px] border border-border bg-card overflow-hidden shadow-sm">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-border bg-muted/30/40 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                <tr className="border-b border-border bg-muted/50 text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
                   <th className="px-6 py-4">User</th>
                   <th className="px-6 py-4">Vai trò</th>
                   <th className="px-6 py-4">Trạng thái</th>
                   <th className="px-6 py-4 text-right">Hoạt động</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border-subtle/50">
+              <tbody className="divide-y divide-border/50">
                 {[
                   { name: 'Nguyễn Văn A', email: 'a.nguyen@fptu.edu.vn', role: 'Admin', status: 'Active', lastActive: '2 phút trước' },
                   { name: 'Trần Thị B', email: 'b.tran@agency.com', role: 'User', status: 'Active', lastActive: '1 giờ trước' },
                   { name: 'Lê Văn C', email: 'c.le@logistic.io', role: 'User', status: 'Inactive', lastActive: '3 ngày trước' },
                   { name: 'Phạm Minh D', email: 'd.pham@tech.com', role: 'User', status: 'Active', lastActive: '5 phút trước' },
                 ].map((user, i) => (
-                  <tr key={i} className="hover:bg-muted/30/30 transition-colors">
+                  <tr key={i} className="hover:bg-muted/30 transition-colors group">
                     <td className="px-6 py-4">
                       <div className="flex flex-col">
                         <span className="font-bold text-foreground">{user.name}</span>
@@ -155,27 +155,36 @@ function AdminStatCard({ label, value, trend, icon: Icon, color }: { label: stri
   };
 
   return (
-    <div className="group rounded-[32px] border border-border bg-muted/30/30 p-6 backdrop-blur-sm transition-all hover:bg-muted/30/60 hover:-translate-y-1">
-      <div className="flex items-center justify-between mb-4">
-        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${colorMap[color]}`}>
+    <div className="group relative overflow-hidden rounded-[32px] border border-border bg-card p-6 shadow-luxury transition-all hover:bg-muted/50 hover:-translate-y-1">
+      {/* Semantic Top Accent */}
+      <div className={`absolute top-0 left-0 w-full h-1 ${colorMap[color].split(' ')[1]}`} />
+      
+      <div className="flex items-center justify-between mb-6">
+        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:scale-110 ${colorMap[color]}`}>
           <Icon className="h-6 w-6" />
         </div>
-        <div className="flex items-center gap-1 text-[10px] font-black text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg">
+        <div className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-black text-emerald-500">
           <TrendingUp className="h-3 w-3" />
           {trend}
         </div>
       </div>
-      <div>
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-1">{label}</p>
-        <h4 className="text-2xl font-black text-foreground group-hover:text-primary transition-colors">{value}</h4>
+      <div className="relative z-10">
+        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/70 mb-1 group-hover:text-muted-foreground transition-colors">{label}</p>
+        <div className="flex items-baseline gap-2">
+          <h4 className="text-2xl font-black text-foreground group-hover:text-primary transition-colors italic">{value}</h4>
+          <div className={`h-1.5 w-1.5 rounded-full animate-pulse ${colorMap[color].split(' ')[1]}`} />
+        </div>
       </div>
+
+      {/* Background decoration */}
+      <Icon className={`absolute -right-4 -bottom-4 h-24 w-24 opacity-[0.03] transition-transform group-hover:scale-125 ${colorMap[color].split(' ')[0]}`} />
     </div>
   );
 }
 
 function HealthItem({ label, status, value }: { label: string; status: string; value: string }) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-2xl border border-border/50 bg-muted/30/10">
+    <div className="flex items-center justify-between p-4 rounded-2xl border border-border bg-card hover:bg-muted/30 transition-colors shadow-sm">
       <div className="flex flex-col">
         <span className="text-xs font-bold text-foreground">{label}</span>
         <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{status}</span>

@@ -22,7 +22,7 @@ export default function UserManagementPage() {
     <div className="container mx-auto p-8 space-y-8 animate-in fade-in duration-700">
       {/* Breadcrumbs/Nav */}
       <div className="flex items-center gap-4">
-        <Link href="/admin" className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted/30/50 text-muted-foreground hover:text-primary transition-all">
+        <Link href="/admin/dashboard" className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-muted-foreground hover:text-primary transition-all">
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <div>
@@ -40,14 +40,14 @@ export default function UserManagementPage() {
           <input 
             type="text" 
             placeholder="Tìm kiếm theo tên hoặc email..." 
-            className="w-full pl-12 pr-4 py-3 rounded-2xl border border-border bg-muted/30/20 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+            className="w-full pl-12 pr-4 py-3 rounded-2xl border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold placeholder:font-medium"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         
         <div className="flex items-center gap-3 w-full md:w-auto">
-          <button className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-border bg-muted/30/20 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-all">
+          <button className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-border bg-card text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-all">
             <Filter className="h-4 w-4" />
             Bộ lọc
           </button>
@@ -59,10 +59,10 @@ export default function UserManagementPage() {
       </div>
 
       {/* User Table */}
-      <div className="rounded-[32px] border border-border bg-muted/30/30 overflow-hidden backdrop-blur-sm">
+      <div className="rounded-[32px] border border-border bg-card overflow-hidden shadow-sm">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-border bg-muted/30/40 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+            <tr className="border-b border-border bg-muted/50 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
               <th className="px-8 py-5">Định danh người dùng</th>
               <th className="px-8 py-5">Vai trò</th>
               <th className="px-8 py-5">Ngày gia nhập</th>
@@ -70,7 +70,7 @@ export default function UserManagementPage() {
               <th className="px-8 py-5 text-right">Thao tác</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border-subtle/50">
+          <tbody className="divide-y divide-border/50">
             {[
               { id: '1', name: 'Nguyễn Văn A', email: 'a.nguyen@fptu.edu.vn', role: 'Administrator', joined: '12/02/2026', status: 'Active', avatar: 'NA' },
               { id: '2', name: 'Trần Thị B', email: 'b.tran@agency.com', role: 'User', joined: '15/02/2026', status: 'Active', avatar: 'TB' },

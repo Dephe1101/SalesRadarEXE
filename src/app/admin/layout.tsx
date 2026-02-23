@@ -10,10 +10,8 @@ import {
   Users, 
   Database, 
   Activity, 
-  Settings, 
   Bell, 
   Search, 
-  Command, 
   Sun, 
   Moon, 
   LayoutGrid, 
@@ -107,7 +105,7 @@ export default function AdminLayout({
             <Button 
               variant="outline"
               onClick={handleLogout}
-              className="flex-1 gap-2 h-10 rounded-xl hover:text-destructive hover:border-destructive/30 transition-all font-bold text-xs uppercase tracking-widest"
+              className="flex-1 gap-2 h-10 rounded-xl hover:text-destructive hover:border-destructive/30 hover:bg-red-500/10 transition-all font-bold text-xs uppercase tracking-widest"
             >
               <LogOut className="h-4 w-4" />
               Thoát

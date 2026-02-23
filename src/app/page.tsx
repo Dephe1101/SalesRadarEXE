@@ -219,34 +219,59 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How it works (AI Workflow) */}
-      <section id="how-it-works" className="px-6 md:px-12 py-24 bg-foreground text-background overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute top-10 right-10 h-64 w-64 border-2 border-primary rounded-full animate-ping" />
-        </div>
+      {/* How it works (AI Workflow) - Refreshed "Fresh" Design */}
+      <section id="how-it-works" className="px-6 md:px-12 py-24 bg-linear-to-b from-background via-primary/5 to-background overflow-hidden relative border-y border-primary/10">
+        {/* Animated Background Orbs for "Fresh" feel */}
+        <div className="absolute top-1/4 -left-1/4 h-[50%] w-[50%] bg-primary/10 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-1/4 -right-1/4 h-[50%] w-[50%] bg-accent/10 blur-[120px] rounded-full animate-pulse [animation-delay:2s]" />
         
         <div className="max-w-6xl mx-auto space-y-20 relative z-10">
-          <div className="max-w-xl space-y-4">
-            <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Quy trình AI thông minh</h2>
-            <h3 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
-              Biến dữ liệu rải rác thành &quot;Danh sách nên gọi ngay hôm nay&quot;
+          <div className="max-w-2xl space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="h-0.5 w-10 bg-primary" />
+              <h2 className="text-xs font-black uppercase tracking-[0.4em] text-primary">Quy trình AI Intelligence</h2>
+            </div>
+            <h3 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-foreground italic text-balance">
+              Biến dữ liệu rải rác thành <br />
+              <span className="text-primary not-italic">&quot;Danh sách săn Lead&quot;</span> chuẩn xác
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { step: "01", icon: Search, title: "Thu thập dữ liệu", desc: "Quét tin tuyển dụng, website, fanpage và các thông báo khai trương công khai." },
-              { step: "02", icon: Zap, title: "Phát hiện tín hiệu", desc: "Nhận diện dấu hiệu doanh nghiệp sắp chi tiền cho Marketing, Logistic, Tech." },
-              { step: "03", icon: BarChart3, title: "Chấm điểm (Lead Score)", desc: "Xác định độ 'nóng' của lead để sales biết ưu tiên ai trước, tránh gọi lan man." },
-              { step: "04", icon: MessageSquare, title: "Gợi ý kịch bản", desc: "Tự động tạo email/tin nhắn/call script phù hợp theo bối cảnh của Lead." },
+              { step: "01", icon: Search, title: "Thu thập dữ liệu", desc: "Quét tin tuyển dụng, website, fanpage và các thông báo khai trương công khai.", color: "primary" },
+              { step: "02", icon: Zap, title: "Phát hiện tín hiệu", desc: "Nhận diện dấu hiệu doanh nghiệp sắp chi tiền cho Marketing, Logistic, Tech.", color: "accent" },
+              { step: "03", icon: BarChart3, title: "Chấm điểm (Lead Score)", desc: "Xác định độ 'nóng' của lead để sales biết ưu tiên ai trước, tránh gọi lan man.", color: "indigo" },
+              { step: "04", icon: MessageSquare, title: "Gợi ý kịch bản", desc: "Tự động tạo email/tin nhắn/call script phù hợp theo bối cảnh của Lead.", color: "blue" },
             ].map((item, i) => (
-              <div key={i} className="space-y-4 group">
-                <div className="text-5xl font-black text-background/15 group-hover:text-primary transition-colors duration-500">{item.step}</div>
-                <div className="h-12 w-12 rounded-xl bg-background/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                  <item.icon className="h-6 w-6" />
+              <div key={i} className="group relative p-8 rounded-[38px] bg-card/40 border border-border backdrop-blur-sm transition-all hover:bg-card hover:shadow-luxury hover:-translate-y-2">
+                {/* Step Number with vibrant accent */}
+                <div className="absolute top-6 right-8 text-6xl font-black text-foreground/5 group-hover:text-primary transition-colors duration-500 tabular-nums">
+                  {item.step}
                 </div>
-                <h4 className="text-xl font-bold italic">{item.title}</h4>
-                <p className="text-sm text-background/60 leading-relaxed font-medium">{item.desc}</p>
+                
+                <div className="space-y-6 relative z-10">
+                  <div className={`h-14 w-14 rounded-2xl flex items-center justify-center transition-all bg-muted group-hover:scale-110 group-hover:shadow-lg ${
+                    item.color === 'primary' ? 'group-hover:bg-primary group-hover:text-white text-primary' : 
+                    item.color === 'accent' ? 'group-hover:bg-accent group-hover:text-white text-accent' :
+                    item.color === 'indigo' ? 'group-hover:bg-indigo-500 group-hover:text-white text-indigo-500' :
+                    'group-hover:bg-blue-500 group-hover:text-white text-blue-500'
+                  }`}>
+                    <item.icon className="h-7 w-7" />
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <h4 className="text-xl font-black text-foreground tracking-tight italic text-balance">{item.title}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-bold uppercase tracking-tight opacity-70 group-hover:opacity-100 transition-opacity">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Connector line for large screens */}
+                {i < 3 && (
+                  <div className="hidden lg:block absolute top-[45%] -right-4 w-8 h-[2px] bg-linear-to-r from-border to-transparent z-0" />
+                )}
               </div>
             ))}
           </div>

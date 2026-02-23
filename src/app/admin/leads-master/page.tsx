@@ -98,13 +98,13 @@ export default function MasterLeadsPage() {
       <Card className="rounded-[32px] border-border bg-card overflow-hidden shadow-sm">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/10 border-b border-border">
-              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground">Inbound ID</TableHead>
-              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground">Thực thể / Nguồn thô</TableHead>
-              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground">Ingestion Time</TableHead>
-              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground">AI Score</TableHead>
-              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground">Status</TableHead>
-              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground text-right">Action</TableHead>
+            <TableRow className="bg-muted/50 border-b border-border">
+              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground">Inbound ID</TableHead>
+              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground">Thực thể / Nguồn thô</TableHead>
+              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground">Ingestion Time</TableHead>
+              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground">AI Score</TableHead>
+              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground">Status</TableHead>
+              <TableHead className="px-6 py-4 h-12 text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground text-right">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
