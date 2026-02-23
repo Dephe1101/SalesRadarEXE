@@ -9,16 +9,17 @@ import {
   LayoutDashboard, 
   Radar as RadarIcon, 
   Settings, 
-  Bell,
-  Search,
-  Command,
-  User,
-  Sun,
-  Moon,
-  Zap,
-  Target,
-  Bookmark,
-  MessageSquare
+  Bell, 
+  Search, 
+  Command, 
+  User, 
+  Sun, 
+  Moon, 
+  Zap, 
+  Target, 
+  Bookmark, 
+  MessageSquare,
+  LucideIcon
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -164,7 +165,7 @@ export default function SalesLayout({
   );
 }
 
-function NavItem({ icon: Icon, active = false, onClick, label }: { icon: any; active?: boolean; onClick?: () => void, label: string }) {
+function NavItem({ icon: Icon, active = false, onClick, label }: { icon: LucideIcon; active?: boolean; onClick?: () => void, label: string }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>

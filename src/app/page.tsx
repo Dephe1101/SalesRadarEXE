@@ -18,7 +18,8 @@ import {
   Building2,
   Truck,
   Megaphone,
-  AlertCircle
+  AlertCircle,
+  LucideIcon
 } from 'lucide-react';
 
 export default function LandingPage() {
@@ -130,7 +131,7 @@ export default function LandingPage() {
                 </div>
                 <div>
                   <p className="font-bold text-foreground">Sai thời điểm (Wrong Timing)</p>
-                  <p className="text-sm text-muted-foreground">Có data nhưng không biết ai "đang thực sự cần", dẫn đến gọi sai người, mất cơ hội.</p>
+                  <p className="text-sm text-muted-foreground">Có data nhưng không biết ai &quot;đang thực sự cần&quot;, dẫn đến gọi sai người, mất cơ hội.</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -228,7 +229,7 @@ export default function LandingPage() {
           <div className="max-w-xl space-y-4">
             <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-primary">Quy trình AI thông minh</h2>
             <h3 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
-              Biến dữ liệu rải rác thành "Danh sách nên gọi ngay hôm nay"
+              Biến dữ liệu rải rác thành &quot;Danh sách nên gọi ngay hôm nay&quot;
             </h3>
           </div>
 
@@ -376,7 +377,7 @@ export default function LandingPage() {
             <Radar className="h-8 w-8" />
           </div>
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground italic">
-            Sẵn sàng để "Săn" lead?
+            Sẵn sàng để &quot;Săn&quot; lead?
           </h2>
           <p className="max-w-xl mx-auto text-muted-foreground font-bold uppercase tracking-widest text-[11px]">
             Đừng để lỡ mất tín hiệu từ khách hàng tiềm năng. Hãy để AI Sales Radar giúp bạn chốt hợp đồng B2B nhanh hơn bao giờ hết.
@@ -395,7 +396,7 @@ export default function LandingPage() {
             <a href="#" className="hover:text-primary transition-colors">Liên hệ</a>
           </div>
           <div className="text-[9px] font-bold uppercase tracking-[0.4em] text-muted-foreground/40">
-            Sales Radar © 2026 // Nâng tầm sales B2B Việt Nam
+            Sales Radar © 2026 {"//"} Nâng tầm sales B2B Việt Nam
           </div>
         </div>
       </footer>
@@ -403,7 +404,7 @@ export default function LandingPage() {
   );
 }
 
-function SignalCard({ icon: Icon, title, signal, result, color }: { icon: any; title: string, signal: string, result: string, color: string }) {
+function SignalCard({ icon: Icon, title, signal, result, color }: { icon: LucideIcon; title: string, signal: string, result: string, color: string }) {
   return (
     <motion.div 
       whileHover={{ y: -5 }}
@@ -429,7 +430,7 @@ function SignalCard({ icon: Icon, title, signal, result, color }: { icon: any; t
   );
 }
 
-function FeatureCard({ icon: Icon, title, desc }: { icon: any; title: string; desc: string }) {
+function FeatureCard({ icon: Icon, title, desc }: { icon: LucideIcon; title: string; desc: string }) {
   return (
     <motion.div 
       whileHover={{ y: -10 }}

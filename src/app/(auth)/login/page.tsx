@@ -175,7 +175,7 @@ export default function LoginPage() {
                 <ShieldCheck className="h-3.5 w-3.5 text-accent" />
                 Dữ liệu được mã hóa bảo mật
               </div>
-              <p className="text-[9px] text-muted-foreground/50 font-bold uppercase tracking-widest">© 2026 Sales Radar // Hệ thống bảo mật đa tầng</p>
+              <p className="text-[9px] text-muted-foreground/50 font-bold uppercase tracking-widest">© 2026 Sales Radar {"//"} Hệ thống bảo mật đa tầng</p>
             </div>
           </Card>
         </div>

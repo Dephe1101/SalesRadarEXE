@@ -11,7 +11,8 @@ import {
   ArrowUpRight,
   Database,
   Cpu,
-  Globe
+  Globe,
+  LucideIcon
 } from 'lucide-react';
 
 export default function AdminPage() {
@@ -145,8 +146,8 @@ export default function AdminPage() {
   );
 }
 
-function AdminStatCard({ label, value, trend, icon: Icon, color }: any) {
-  const colorMap: any = {
+function AdminStatCard({ label, value, trend, icon: Icon, color }: { label: string; value: string; trend: string; icon: LucideIcon; color: 'indigo' | 'emerald' | 'violet' | 'blue' }) {
+  const colorMap: Record<string, string> = {
     indigo: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
     emerald: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
     violet: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
@@ -172,7 +173,7 @@ function AdminStatCard({ label, value, trend, icon: Icon, color }: any) {
   );
 }
 
-function HealthItem({ label, status, value }: any) {
+function HealthItem({ label, status, value }: { label: string; status: string; value: string }) {
   return (
     <div className="flex items-center justify-between p-4 rounded-2xl border border-border/50 bg-muted/30/10">
       <div className="flex flex-col">

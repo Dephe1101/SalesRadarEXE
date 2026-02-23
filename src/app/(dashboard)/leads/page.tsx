@@ -39,7 +39,7 @@ export default function LeadsPage() {
             </h1>
           </div>
           <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">
-            Hệ thống phát hiện tín hiệu khách hàng B2B <span className="text-primary/30 mx-2">//</span> Real-time Intelligence
+            Hệ thống phát hiện tín hiệu khách hàng B2B <span className="text-primary/30 mx-2">{"//"}</span> Real-time Intelligence
           </p>
         </div>
 
@@ -131,7 +131,7 @@ export default function LeadsPage() {
             <Target className="h-8 w-8" />
           </div>
           <div className="space-y-2 text-center lg:text-left flex-1">
-            <h3 className="text-2xl font-black text-foreground tracking-tight italic">"Tín hiệu: Sóng Logistic đang tăng mạnh tại phía Nam"</h3>
+            <h3 className="text-2xl font-black text-foreground tracking-tight italic">&quot;Tín hiệu: Sóng Logistic đang tăng mạnh tại phía Nam&quot;</h3>
             <p className="max-w-xl text-sm font-bold text-muted-foreground uppercase leading-relaxed tracking-tight">
               Hệ thống phát hiện <span className="text-primary font-black">tăng 45% nhu cầu</span> kho bãi trong 24h qua. Đề xuất ưu tiên các lead ngành vận tải.
             </p>

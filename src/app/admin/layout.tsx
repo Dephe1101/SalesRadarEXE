@@ -11,16 +11,17 @@ import {
   Database, 
   Activity, 
   Settings, 
-  Bell,
-  Search,
-  Command,
-  Sun,
-  Moon,
-  LayoutGrid,
-  Lock,
-  Server,
-  BarChart2,
-  Cpu
+  Bell, 
+  Search, 
+  Command, 
+  Sun, 
+  Moon, 
+  LayoutGrid, 
+  Lock, 
+  Server, 
+  BarChart2, 
+  Cpu,
+  LucideIcon
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -160,7 +161,7 @@ export default function AdminLayout({
   );
 }
 
-function AdminNavItem({ icon: Icon, label, active = false, onClick }: any) {
+function AdminNavItem({ icon: Icon, label, active = false, onClick }: { icon: LucideIcon; label: string; active?: boolean; onClick?: () => void }) {
   return (
     <button 
       onClick={onClick}
