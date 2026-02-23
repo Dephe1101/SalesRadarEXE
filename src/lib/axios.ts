@@ -40,7 +40,7 @@ api.interceptors.request.use(
  */
 api.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => {
+  (error: AxiosError<{ message?: string }>) => {
     // Handle 401 Unauthorized (e.g., token expired)
     if (error.response?.status === 401) {
       // Clear session
@@ -54,7 +54,7 @@ api.interceptors.response.use(
     }
 
     // Extract precise error message from API response
-    const apiError = (error.response?.data as any)?.message || error.message || 'Đã có lỗi xảy ra trong quá trình xử lý.';
+    const apiError = error.response?.data?.message || error.message || 'Đã có lỗi xảy ra trong quá trình xử lý.';
     
     return Promise.reject(new Error(apiError));
   }

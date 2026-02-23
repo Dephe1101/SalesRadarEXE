@@ -19,7 +19,8 @@ import {
   Share2,
   MessageSquare,
   AlertCircle,
-  Plus
+  Plus,
+  LucideIcon
 } from 'lucide-react';
 import {
   Dialog,
@@ -211,7 +212,7 @@ export const LeadDetailModal: React.FC<LeadDetailModalProps> = ({
   );
 };
 
-function ActionButton({ icon: Icon, label, color }: { icon: any; label: string; color: string }) {
+function ActionButton({ icon: Icon, label, color }: { icon: LucideIcon; label: string; color: string }) {
   return (
     <button className="flex flex-col items-center justify-center gap-3 p-4 rounded-2xl border border-border bg-card hover:bg-muted/50 transition-all group">
       <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-muted/50 group-hover:bg-white border border-transparent group-hover:border-border transition-all ${color}`}>
@@ -234,7 +235,7 @@ function ScoreBar({ label, value, score, color }: { label: string; value: number
   );
 }
 
-function InfoItem({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
+function InfoItem({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
     <div className="flex items-start gap-4 p-4 rounded-2xl border border-border/50 bg-card/40">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background border border-border text-primary shadow-sm">
