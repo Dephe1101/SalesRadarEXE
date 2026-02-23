@@ -306,7 +306,7 @@ export default function LandingPage() {
               <div className="space-y-4">
                 <div className="p-4 bg-muted/30 rounded-2xl border border-border">
                   <div className="text-[10px] font-bold text-muted-foreground uppercase mb-2">Tín hiệu phát hiện:</div>
-                  <p className="text-sm italic text-foreground/80">"Công ty vừa đăng tin tuyển 5 quản lý kho và 20 nhân viên vận hành tại Dĩ An."</p>
+                  <p className="text-sm italic text-foreground/80">&quot;Công ty vừa đăng tin tuyển 5 quản lý kho và 20 nhân viên vận hành tại Dĩ An.&quot;</p>
                 </div>
 
                 <div className="space-y-3">
@@ -316,8 +316,8 @@ export default function LandingPage() {
                   </div>
                   <div className="p-4 bg-primary/5 border border-primary/20 rounded-2xl text-[13px] leading-relaxed relative group">
                     <p className="text-foreground/80">
-                      "Chào anh/chị [Name], em thấy X-Logistic đang mở rộng quy mô kho bãi tại Bình Dương. 
-                      Bên em chuyên cung cấp giải pháp [Dịch vụ của bạn] giúp tối ưu 30% chi phí vận hành cho các kho mới..."
+                      &quot;Chào anh/chị [Name], em thấy X-Logistic đang mở rộng quy mô kho bãi tại Bình Dương. 
+                      Bên em chuyên cung cấp giải pháp [Dịch vụ của bạn] giúp tối ưu 30% chi phí vận hành cho các kho mới...&quot;
                     </p>
                     <button className="absolute top-2 right-2 p-2 rounded-lg bg-background border border-border opacity-0 group-hover:opacity-100 transition-opacity">
                       <Target className="h-3 w-3 text-primary" />
@@ -418,7 +418,7 @@ function SignalCard({ icon: Icon, title, signal, result, color }: { icon: Lucide
         <div className="space-y-4">
           <div className="space-y-1">
             <p className="text-[10px] uppercase font-bold text-primary tracking-widest">Tín hiệu</p>
-            <p className="text-sm font-medium italic text-foreground/80">"{signal}"</p>
+            <p className="text-sm font-medium italic text-foreground/80">&quot;{signal}&quot;</p>
           </div>
           <div className="space-y-1">
             <p className="text-[10px] uppercase font-bold text-accent tracking-widest">Nhu cầu</p>
