@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-outfit);
   --font-mono: var(--font-geist-mono);
 
   /* Luxury Color Palette Tokens */
@@ -52,44 +52,44 @@
 }
 
 :root {
-  /* Light Theme - Institutional Silver/Blue */
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.12 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0 0);
+  /* Light Theme - Imperial Silver/Premium Blue */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
   --primary: #4f46e5;
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.92 0 0);
-  --secondary-foreground: oklch(0.2 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.35 0 0); /* Even darker for better visibility */
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #1e293b;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
   --accent: #10b981;
-  --accent-foreground: oklch(0.98 0 0);
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.6 0.2 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.88 0 0);
-  --border-subtle: oklch(0.94 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.7 0 0);
-  --radius: 0.75rem;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  --input: #f1f5f9;
+  --ring: #4f46e5;
+  --radius: 1rem;
 }
 
 .dark {
   /* Dark Theme - Midnight Financial Terminal */
   --background: #020617;
-  --foreground: oklch(0.98 0 0);
+  --foreground: #ffffff; /* pure white for max visibility */
   --card: #050b1a;
-  --card-foreground: oklch(0.98 0 0);
+  --card-foreground: #f8fafc;
   --popover: #050b1a;
-  --popover-foreground: oklch(0.98 0 0);
+  --popover-foreground: #f8fafc;
   --primary: #6366f1;
-  --primary-foreground: oklch(0.2 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.12 0 0);
-  --muted-foreground: oklch(0.75 0 0); /* Even brighter for better visibility */
+  --primary-foreground: #ffffff;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #0f172a;
+  --muted-foreground: #cbd5e1; /* much brighter for dark theme visibility */
   --accent: #34d399;
   --accent-foreground: oklch(0.15 0 0);
   --destructive: oklch(0.4 0.2 25);
@@ -101,7 +101,7 @@
 }
 
 body {
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -159,12 +159,35 @@ path {
     box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
   }
 
-  .luxury-gradient {
-    background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
-  }
-
   .dark .luxury-gradient {
     background: linear-gradient(135deg, #6366f1 0%, #1e1b4b 100%);
+  }
+
+  /* 🚀 Neon Hover Effects 🚀 */
+  .hover-neon-orange {
+    transition: all 0.3s ease;
+  }
+
+  .dark .hover-neon-orange:hover {
+    box-shadow:
+      0 0 20px rgba(249, 115, 22, 0.6),
+      0 0 40px rgba(249, 115, 22, 0.2);
+    border-color: rgba(249, 115, 22, 0.5) !important;
+    transform: translateY(-2px);
+  }
+
+  /* Dashboard Mockup Styles */
+  .dashboard-mockup {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.5);
+  }
+
+  .light .dashboard-mockup {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -174,5 +197,107 @@ path {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+
+  .dark .text-glow {
+    text-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+  }
+
+  .mesh-bg {
+    background-color: var(--background);
+    background-image:
+      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.08) 0px, transparent 50%),
+      radial-gradient(
+        at 100% 0%,
+        rgba(16, 185, 129, 0.05) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 100% 100%,
+        rgba(79, 70, 229, 0.08) 0px,
+        transparent 50%
+      ),
+      radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+  }
+
+  .dark .mesh-bg {
+    background-image:
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+      radial-gradient(
+        at 100% 100%,
+        rgba(99, 102, 241, 0.15) 0px,
+        transparent 50%
+      ),
+      radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+  }
+
+  .luxury-border {
+    position: relative;
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      linear-gradient(135deg, rgba(99, 102, 241, 1), rgba(16, 185, 129, 1))
+        border-box;
+    border: 1px solid transparent;
+  }
+
+  .high-tech-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, currentColor 1px, transparent 1px),
+      linear-gradient(to bottom, currentColor 1px, transparent 1px);
+    color: rgba(
+      79,
+      70,
+      229,
+      0.1
+    ); /* Increased visibility and added primary tint for luxury */
+  }
+
+  .dark .high-tech-grid {
+    color: rgba(255, 255, 255, 0.07);
+  }
+
+  .noise {
+    position: relative;
+  }
+
+  .noise::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .animate-scan {
+    animation: scan 3s linear infinite;
+  }
+
+  @keyframes scan {
+    0% {
+      top: 0;
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    95% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
   }
 }

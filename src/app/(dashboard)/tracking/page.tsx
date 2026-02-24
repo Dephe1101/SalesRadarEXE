@@ -180,7 +180,7 @@ export default function TrackingPage() {
                 </div>
                 <h2 className="text-xl font-bold text-foreground tracking-tight italic uppercase">Pipeline <span className="text-orange-500 not-italic">Visualizer</span></h2>
             </div>
-            <Button variant="ghost" size="sm" className="text-[10px] font-bold uppercase tracking-widest gap-2">
+            <Button variant="ghost" size="sm" className="text-[10px] font-bold uppercase tracking-widest gap-2 hover:text-primary hover:bg-primary/10">
                 <Filter className="h-4 w-4" />
                 Tất cả trạng thái
             </Button>
@@ -231,11 +231,15 @@ export default function TrackingPage() {
                 </div>
 
                 {/* Actions */}
-                <div className="lg:col-span-2 flex items-center justify-end gap-2">
-                  <Button variant="outline" size="sm" className="rounded-xl h-10 px-4 text-[10px] font-black uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all">
+                <div className="lg:col-span-2 flex items-center justify-end gap-3 relative z-20">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="rounded-xl h-10 px-6 text-[10px] font-black uppercase tracking-widest border-border hover:border-orange-500 hover:bg-orange-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/20 active:scale-95 transition-all duration-300"
+                  >
                     Tiếp tục
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-10 w-10 border border-border rounded-xl">
+                  <Button variant="ghost" size="icon" className="h-10 w-10 border border-border rounded-xl hover:bg-muted hover:border-muted-foreground/20 transition-all">
                     <MoreHorizontal className="h-4 w-4" />
                   </Button>
                 </div>
