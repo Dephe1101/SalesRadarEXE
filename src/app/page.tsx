@@ -653,7 +653,23 @@ function DashboardMockup() {
     return () => clearTimeout(timerId);
   }, []);
 
-  const views: Record<string, { title: string; color: string; bgColor: string; borderColor: string; icon: React.ReactNode; stats: any[] }> = {
+  interface DashboardStat {
+    label: string;
+    value: string;
+    trend: string;
+    trendColor: string;
+  }
+
+  interface DashboardView {
+    title: string;
+    color: string;
+    bgColor: string;
+    borderColor: string;
+    icon: React.ReactElement;
+    stats: DashboardStat[];
+  }
+
+  const views: Record<string, DashboardView> = {
     signals: {
       title: 'SignalsRadar',
       color: 'text-indigo-500',
@@ -798,7 +814,7 @@ function DashboardMockup() {
                   <div className="space-y-4">
                     <div className="flex items-center gap-5">
                        <div className={`h-16 w-16 rounded-[24px] ${views[view].bgColor} ${views[view].color} flex items-center justify-center shadow-inner border ${views[view].borderColor}`}>
-                          {React.isValidElement(views[view].icon) && React.cloneElement(views[view].icon as any, { size: 32 })}
+                           {React.isValidElement(views[view].icon) && React.cloneElement(views[view].icon as React.ReactElement<{ size?: number }>, { size: 32 })}
                        </div>
                        <div className="space-y-1">
                          <h3 className={`text-5xl font-black italic tracking-tighter uppercase ${views[view].color}`}>{views[view].title}</h3>
