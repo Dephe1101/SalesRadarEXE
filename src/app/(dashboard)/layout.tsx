@@ -70,9 +70,9 @@ export default function SalesLayout({
           
           <nav className="flex flex-1 flex-col gap-8">
             <NavItem icon={LayoutDashboard} active={pathname === '/leads'} onClick={() => router.push('/leads')} label="Feed Lead" />
-            <NavItem icon={Bookmark} active={pathname === '/saved'} label="Đã lưu" />
-            <NavItem icon={MessageSquare} active={pathname === '/outreach'} label="Kịch bản" />
-            <NavItem icon={Target} active={pathname === '/tracking'} label="Theo dõi" />
+            <NavItem icon={Bookmark} active={pathname === '/saved'} onClick={() => router.push('/saved')} label="Đã lưu" />
+            <NavItem icon={MessageSquare} active={pathname === '/outreach'} onClick={() => router.push('/outreach')} label="Kịch bản" />
+            <NavItem icon={Target} active={pathname === '/tracking'} onClick={() => router.push('/tracking')} label="Theo dõi" />
           </nav>
 
           <div className="flex flex-col items-center gap-6">
@@ -155,7 +155,7 @@ export default function SalesLayout({
           </header>
 
           <main className="flex-1 p-6 md:p-10">
-            <div className="h-full rounded-[40px] bg-muted/5 backdrop-blur-sm border border-border/50 shadow-inner overflow-auto">
+            <div className="h-full rounded-[40px] bg-muted/5 backdrop-blur-sm border border-border/50 shadow-inner overflow-y-auto stable-gutter">
               {children}
             </div>
           </main>

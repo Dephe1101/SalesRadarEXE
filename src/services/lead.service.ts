@@ -12,6 +12,7 @@ const MOCK_LEADS: Partial<Lead>[] = [
     fitScore: 8.5,
     signalScore: 9.0,
     recencyScore: 10,
+    isSaved: true,
     createdAt: new Date().toISOString(),
   },
   {
@@ -23,6 +24,7 @@ const MOCK_LEADS: Partial<Lead>[] = [
     fitScore: 9.5,
     signalScore: 8.5,
     recencyScore: 9,
+    isSaved: true,
     createdAt: new Date().toISOString(),
   },
   {
@@ -34,6 +36,7 @@ const MOCK_LEADS: Partial<Lead>[] = [
     fitScore: 7.5,
     signalScore: 6.0,
     recencyScore: 8,
+    isSaved: false,
     createdAt: new Date().toISOString(),
   },
   {

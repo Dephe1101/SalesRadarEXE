@@ -17,7 +17,8 @@ import {
   ArrowUpRight,
   Activity,
   MessageSquare,
-  Globe
+  Globe,
+  Bookmark
 } from 'lucide-react';
 import { LeadDetailModal } from './LeadDetailModal';
 import { 
@@ -32,10 +33,22 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
-export const LeadTable: React.FC = () => {
-  const { data: leads, isLoading } = useRadarLeads();
+interface LeadTableProps {
+  filterSaved?: boolean;
+}
+
+export const LeadTable: React.FC<LeadTableProps> = ({ filterSaved = false }) => {
+  const { data: allLeads, isLoading } = useRadarLeads();
   const [isProcessing, setIsProcessing] = React.useState<string | null>(null);
   const [selectedLead, setSelectedLead] = React.useState<Lead | null>(null);
+
+  const leads = React.useMemo(() => {
+    if (!allLeads) return [];
+    if (filterSaved) {
+      return allLeads.filter(lead => lead.isSaved);
+    }
+    return allLeads;
+  }, [allLeads, filterSaved]);
 
   const handleGenEmail = async (lead: Lead) => {
     setIsProcessing(lead.id);
@@ -87,88 +100,120 @@ export const LeadTable: React.FC = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {leads?.map((lead) => (
-              <TableRow 
-                key={lead.id} 
-                className="group border-b border-border/50 last:border-0 hover:bg-muted/30 transition-colors cursor-pointer"
-                onClick={() => setSelectedLead(lead)}
-              >
-                <TableCell className="px-8 py-5">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 text-primary border border-border transition-transform group-hover:scale-105">
-                      <Building2 className="h-6 w-6" />
+            {leads?.length > 0 ? (
+              leads.map((lead) => (
+                <TableRow 
+                  key={lead.id} 
+                  className="group border-b border-border/50 last:border-0 transition-colors"
+                >
+                  <TableCell 
+                    className="px-8 py-5 cursor-pointer hover:bg-primary/5 transition-colors group/cell"
+                    onClick={() => setSelectedLead(lead)}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 text-primary border border-border transition-transform group-hover/cell:scale-105 group-hover/cell:border-primary/30">
+                        <Building2 className="h-6 w-6" />
+                      </div>
+                      <div className="space-y-1">
+                        <div className="font-bold text-base text-foreground group-hover/cell:text-primary transition-colors flex items-center gap-2">
+                          {lead.company}
+                          <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground opacity-0 group-hover/cell:opacity-100 transition-all" />
+                        </div>
+                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{lead.jobTitle}</div>
+                      </div>
+                    </div>
+                  </TableCell>
+                  
+                  <TableCell className="px-8 py-5">
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-2 text-foreground font-bold text-xs italic">
+                        <ExternalLink className="h-3.5 w-3.5 text-primary" />
+                        {lead.source}
+                      </div>
+                      <div className="text-[9px] font-bold text-muted-foreground uppercase mt-1">Dữ liệu công khai</div>
+                    </div>
+                  </TableCell>
+   
+                  <TableCell className="px-8 py-5">
+                    <div className="flex flex-wrap gap-2">
+                      {lead.tags.map((tag) => (
+                        <Badge 
+                          key={tag} 
+                          variant="outline"
+                          className="rounded-lg border-primary/10 bg-primary/5 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-primary hover:bg-primary/10"
+                        >
+                          {tag.replace('_', ' ')}
+                        </Badge>
+                      ))}
+                    </div>
+                  </TableCell>
+   
+                  <TableCell className="px-8 py-5">
+                    <div className="flex items-center gap-3">
+                      <div className={`flex h-10 w-10 items-center justify-center rounded-xl border font-black text-lg shadow-sm ${getScoreColor(lead.totalScore)}`}>
+                        {lead.totalScore}
+                      </div>
+                      <div className="space-y-1.5 flex-1 max-w-[100px]">
+                        <div className="text-[9px] font-bold text-muted-foreground uppercase">Độ ưu tiên</div>
+                        <Progress value={(lead.totalScore / 10) * 100} className="h-1.5 w-full bg-muted" />
+                      </div>
+                    </div>
+                  </TableCell>
+   
+                  <TableCell className="px-8 py-5 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleGenEmail(lead)}
+                        disabled={isProcessing === lead.id}
+                        className="rounded-xl h-9 px-4 text-[10px] font-bold uppercase tracking-widest gap-2 hover:bg-primary hover:text-white transition-all shadow-sm"
+                      >
+                        {isProcessing === lead.id ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <>
+                            <Sparkles className="h-3.5 w-3.5" />
+                            Tạo kịch bản
+                          </>
+                        )}
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        className={`h-9 w-9 border border-border rounded-xl transition-colors ${lead.isSaved ? 'text-accent bg-accent/10 border-accent/20' : 'text-muted-foreground'}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // In real app: leadService.toggleSave(lead.id)
+                          toast.success(lead.isSaved ? "Đã bỏ lưu" : "Đã lưu vào bộ sưu tập", {
+                            description: `${lead.company} đã được cập nhật.`
+                          });
+                        }}
+                      >
+                        <Bookmark className={`h-4 w-4 ${lead.isSaved ? 'fill-current' : ''}`} />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-9 w-9 border border-border rounded-xl">
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} className="h-[300px] text-center">
+                  <div className="flex flex-col items-center justify-center gap-4 opacity-50">
+                    <div className="h-16 w-16 rounded-3xl bg-muted flex items-center justify-center">
+                      <Activity className="h-8 w-8 text-muted-foreground" />
                     </div>
                     <div className="space-y-1">
-                      <div className="font-bold text-base text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
-                        {lead.company}
-                        <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-all" />
-                      </div>
-                      <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{lead.jobTitle}</div>
+                      <p className="text-sm font-bold uppercase tracking-widest">Không có dữ liệu</p>
+                      <p className="text-[10px] uppercase font-medium">Radar chưa phát hiện tín hiệu phù hợp trong bộ lọc này.</p>
                     </div>
-                  </div>
-                </TableCell>
-                
-                <TableCell className="px-8 py-5">
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-2 text-foreground font-bold text-xs italic">
-                      <ExternalLink className="h-3.5 w-3.5 text-primary" />
-                      {lead.source}
-                    </div>
-                    <div className="text-[9px] font-bold text-muted-foreground uppercase mt-1">Dữ liệu công khai</div>
-                  </div>
-                </TableCell>
- 
-                <TableCell className="px-8 py-5">
-                  <div className="flex flex-wrap gap-2">
-                    {lead.tags.map((tag) => (
-                      <Badge 
-                        key={tag} 
-                        variant="outline"
-                        className="rounded-lg border-primary/10 bg-primary/5 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-primary hover:bg-primary/10"
-                      >
-                        {tag.replace('_', ' ')}
-                      </Badge>
-                    ))}
-                  </div>
-                </TableCell>
- 
-                <TableCell className="px-8 py-5">
-                  <div className="flex items-center gap-3">
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl border font-black text-lg shadow-sm ${getScoreColor(lead.totalScore)}`}>
-                      {lead.totalScore}
-                    </div>
-                    <div className="space-y-1.5 flex-1 max-w-[100px]">
-                      <div className="text-[9px] font-bold text-muted-foreground uppercase">Độ ưu tiên</div>
-                      <Progress value={(lead.totalScore / 10) * 100} className="h-1.5 w-full bg-muted" />
-                    </div>
-                  </div>
-                </TableCell>
- 
-                <TableCell className="px-8 py-5 text-right">
-                  <div className="flex items-center justify-end gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleGenEmail(lead)}
-                      disabled={isProcessing === lead.id}
-                      className="rounded-xl h-9 px-4 text-[10px] font-bold uppercase tracking-widest gap-2 hover:bg-primary hover:text-white transition-all shadow-sm"
-                    >
-                      {isProcessing === lead.id ? (
-                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                      ) : (
-                        <>
-                          <Sparkles className="h-3.5 w-3.5" />
-                          Tạo kịch bản
-                        </>
-                      )}
-                    </Button>
-                    <Button variant="ghost" size="icon" className="h-9 w-9 border border-border rounded-xl">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
                   </div>
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </div>

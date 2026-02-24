@@ -17,5 +17,6 @@ export interface Lead {
   recencyScore: number; // 0-10
   tags: SignalTag[];
   totalScore: number;  // 0-10 (calculated)
+  isSaved?: boolean;
   createdAt: string;
 }
